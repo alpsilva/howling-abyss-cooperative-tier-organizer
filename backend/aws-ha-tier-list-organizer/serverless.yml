@@ -8,9 +8,4 @@ provider:
   runtime: python3.9
 
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - httpApi:
-          path: /
-          method: get
+  - ${file(functions/tier_list.yml)}

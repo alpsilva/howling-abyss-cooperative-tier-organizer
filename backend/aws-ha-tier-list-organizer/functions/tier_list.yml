@@ -1,0 +1,6 @@
+RegisterTierList:
+  handler: api/register_tier_list.lambda_handler
+  events:
+    - httpApi:
+        path: /tierlist
+        method: POST
