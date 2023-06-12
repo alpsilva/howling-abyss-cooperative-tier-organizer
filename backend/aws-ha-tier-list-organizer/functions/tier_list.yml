@@ -4,3 +4,9 @@ RegisterTierList:
     - httpApi:
         path: /tierlist
         method: POST
+GetPartyTierList:
+  handler: api/get_party_tier_list.lambda_handler
+  events:
+    - httpApi:
+        path: /tierlist/{party_id}
+        method: GET
