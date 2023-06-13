@@ -12,7 +12,15 @@ def lambda_handler(event, context):
 
     db = db_mock.db
     
-    party = event["pathParameters"]["party_id"]
+    path_params = event.get("pathParameters", {})
+    party = path_params.get("party_id", None)
+
+    if party is None:
+        return {
+            "statusCode": HTTPStatus.BAD_REQUEST,
+            "body": "party id not specified."
+        }
+
     members = db[party]["members"]
 
     tier_lists = []
