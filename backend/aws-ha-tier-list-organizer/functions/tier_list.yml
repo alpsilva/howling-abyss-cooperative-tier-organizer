@@ -1,3 +1,9 @@
+RegisterParty:
+  handler: api/register_party.lambda_handler
+  events:
+    - httpApi:
+        path: /party
+        method: POST
 RegisterTierList:
   handler: api/register_tier_list.lambda_handler
   events:
