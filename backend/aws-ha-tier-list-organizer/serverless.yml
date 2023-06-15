@@ -6,6 +6,34 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: python3.9
+  iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:DescribeTable
+      - dynamodb:Query
+      - dynamodb:Scan
+      - dynamodb:GetItem
+      - dynamodb:PutItem
+      - dynamodb:UpdateItem
+      - dynamodb:DeleteItem
+    Resource:
+      - "Fn::GetAtt": [partiesTable, Arn]
 
 functions:
   - ${file(functions/tier_list.yml)}
+
+resources:
+  Resources:
+    partiesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: parties
+        AttributeDefinitions:
+          - AttributeName: party_name
+            AttributeType: S
+        KeySchema:
+          - AttributeName: party_name
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
