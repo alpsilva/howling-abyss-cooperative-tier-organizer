@@ -14,5 +14,5 @@ GetPartyTierList:
   handler: api/get_party_tier_list.lambda_handler
   events:
     - httpApi:
-        path: /tierlist/{party_id}
+        path: /tierlist/{party_name}
         method: GET
